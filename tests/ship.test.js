@@ -38,9 +38,8 @@ test('Create a ship w/ length of 5 & confirm that it is sunk after 5 health redu
     expect(ship.isSunk()).toBe(true);
 });
 
-test('Create a ship, hit a position, & return position as \'hit\'', () => {
+test('Create a ship, receive hit, & return damaged health', () => {
     const ship = createShip(5);
-    const position = {1: 'not hit'};
-    ship.hit(position, 1);
-    expect(position[1]).toBe('hit');
+    ship.hit();
+    expect(ship.health).toBe(4);
 });

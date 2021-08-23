@@ -13,8 +13,8 @@ const createShip = (len) => ({
             return false
         }
     },
-    hit(object, position) {
-        object[position] = 'hit';
+    hit() {
+        this.health -= 1;
     }
 });
 
