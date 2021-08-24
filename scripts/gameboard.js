@@ -4,8 +4,9 @@ const createGameboard = () => ({
     positions: initPositions(),
     ships: {},
     missedHits: [],
+    landedHits: [],
     initShip(ind, len, spots) {
-        const newShip = createShip(len, ind);
+        const newShip = createShip(len, ind, spots);
         this.ships[ind] = newShip;
         for (let i = 0; i < spots.length; i++) {
             const spot = spots[i]
@@ -18,6 +19,7 @@ const createGameboard = () => ({
         if (this.positions[spot].occupied == true) {
             const shipIndex = this.positions[spot].ship;
             this.ships[shipIndex].getsDamaged();
+            this.landedHits.push(spot);
         } else {
             this.missedHits.push(spot);
         };

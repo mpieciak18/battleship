@@ -1,5 +1,4 @@
 const createGameboard = require('../scripts/gameboard');
-const createShip = require('../scripts/ship');
 
 test('Create gameboard object and return positions property with (blank) spots 1-100', () => {
     const board = createGameboard();
