@@ -3,8 +3,9 @@ const createShip = require('../scripts/ship');
 const createGameboard = () => ({
     positions: initPositions(),
     ships: {},
+    missedHits: [],
     initShip(ind, len, spots) {
-        const newShip = createShip(len);
+        const newShip = createShip(len, ind);
         this.ships[ind] = newShip;
         for (let i = 0; i < spots.length; i++) {
             const spot = spots[i]
@@ -16,8 +17,21 @@ const createGameboard = () => ({
         this.positions[spot].hit = true;
         if (this.positions[spot].occupied == true) {
             const shipIndex = this.positions[spot].ship;
-            this.ships[shipIndex].hit();
+            this.ships[shipIndex].getsDamaged();
+        } else {
+            this.missedHits.push(spot);
         };
+    },
+    checkAllSunk() {
+        const shipObjArr = Object.entries(this.ships);
+        for (let i = 0; i < shipObjArr.length; i++) {
+            if (shipObjArr[i][1].isSunk() == false) {
+                return false
+            } else {
+                continue
+            }
+        }
+        return true
     }
 });
 

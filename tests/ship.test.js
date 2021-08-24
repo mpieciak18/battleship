@@ -18,14 +18,14 @@ test('Create a ship w/ length of 5 and return health of 5', () => {
 
 test('Create a ship w/ length of 5, reduce health once, & return health of 4', () => {
     const ship = createShip(5);
-    ship.reduceHealth();
+    ship.getsDamaged();
     expect(ship.getHealth()).toBe(4);
 });
 
 test('Create a ship w/ length of 5 & return health of 0 after 5 health reductions', () => {
     const ship = createShip(5);
     for (let i = 0; i < ship.length; i++) {
-        ship.reduceHealth();
+        ship.getsDamaged();
     };
     expect(ship.getHealth()).toBe(0);
 });
@@ -33,13 +33,13 @@ test('Create a ship w/ length of 5 & return health of 0 after 5 health reduction
 test('Create a ship w/ length of 5 & confirm that it is sunk after 5 health reductions', () => {
     const ship = createShip(5);
     for (let i = 0; i < ship.length; i++) {
-        ship.reduceHealth();
+        ship.getsDamaged();
     };
     expect(ship.isSunk()).toBe(true);
 });
 
 test('Create a ship, receive hit, & return damaged health', () => {
     const ship = createShip(5);
-    ship.hit();
+    ship.getsDamaged();
     expect(ship.health).toBe(4);
 });

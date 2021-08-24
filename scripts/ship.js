@@ -1,10 +1,11 @@
-const createShip = (len) => ({
+const createShip = (len, ind = undefined) => ({
     length: len,
     health: len,
+    index: ind,
     getLength() {return this.length},
     getHealth() {return this.health},
-    reduceHealth() {
-        this.health = this.health - 1;
+    getsDamaged() {
+        this.health -= 1;
     },
     isSunk() {
         if (this.health == 0) {
@@ -12,9 +13,6 @@ const createShip = (len) => ({
         } else {
             return false
         }
-    },
-    hit() {
-        this.health -= 1;
     }
 });
 

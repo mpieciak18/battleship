@@ -30,6 +30,23 @@ test('Create gameboard object, create ship that occupies spots, and check if a s
 test('Create gameboard object, create ship that occupies spots, receive attack, and check if ship is damaged', () => {
     const board = createGameboard();
     board.initShip(0, 5, [25, 35, 45, 55, 65]);
-    board.receiveAttack(45)
+    board.receiveAttack(45);
     expect(board.ships[0].health).toBe(4);
+});
+
+test('Create gameboard object, receive attack on empty spot, and return attacked spot', () => {
+    const board = createGameboard();
+    board.receiveAttack(45);
+    expect(board.missedHits[0]).toBe(45);
+});
+
+test('Create gameboard object, create ship, damage ship until health == 0, and check if all ships are sunk', () => {
+    const board = createGameboard();
+    const shipSpots = [25, 35, 45, 55, 65];
+    board.initShip(0, 5, shipSpots);
+    for (let i = 0; i < shipSpots.length; i++) {
+        const spot = shipSpots[i]
+        board.receiveAttack(spot);
+    }
+    expect(board.checkAllSunk()).toBe(true);
 });
