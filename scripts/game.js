@@ -1,6 +1,5 @@
 const createGame = (playerOne, playerTwo, whoPlaysFirst = 0) => ({
     playsNext: whoPlaysFirst,
-    gameOver: false,
     winner: '',
     pOnePlays(spot) {
         playerOne.attack(playerTwo, spot)

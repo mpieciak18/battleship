@@ -26,7 +26,7 @@ test('Init game w/ two players & ships, guarantee player 1 to win, and check for
     expect(game.checkForWin()).toBe(true);
 });
 
-test('Init game w/ two players & ships, use incremental logic player 1 & rand logic for player 2, and return player 1 as winner', () => {
+test('Init game w/ two players & ships, use set logic player 1 & rand logic for player 2, and return player 1 as winner', () => {
     const playerOne = createPlayer();
     playerOne.initGameboard();
     playerOne.gameboard.initShip(0, 5, [5,15,25,35,45]);
