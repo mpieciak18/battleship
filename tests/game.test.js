@@ -3,21 +3,16 @@ const {randSpot, incSpot, setSpot} = require('../scripts/botlogic');
 const createGame = require('../scripts/game');
 
 test('Init game w/ two players & ships, guarantee player 1 to win, and check for win', () => {
-    const playerOne = createPlayer();
-    playerOne.initGameboard();
-
-    const playerTwo = createPlayer();
-    playerTwo.initGameboard();
-    playerTwo.gameboard.initShip(0, 5, [10,20,30,40,50]);
+    const whoPlaysFirst = 0;
+    const game = createGame(whoPlaysFirst);
+    
+    game.playerTwo.gameboard.initShip(0, 5, [10,20,30,40,50]);
 
     const pOneLogic = () => {
         const spotsArr = [10,20,30,40,50];
-        const spot = setSpot(playerTwo, spotsArr)
+        const spot = setSpot(game.playerTwo, spotsArr)
         return spot
     };
-
-    const whoPlaysFirst = 0;
-    const game = createGame(playerOne, playerTwo, whoPlaysFirst)
 
     for (let i = 0; i < 5; i++) {
         game.pOnePlays(pOneLogic())
@@ -27,26 +22,20 @@ test('Init game w/ two players & ships, guarantee player 1 to win, and check for
 });
 
 test('Init game w/ two players & ships, use set logic player 1 & rand logic for player 2, and return player 1 as winner', () => {
-    const playerOne = createPlayer();
-    playerOne.initGameboard();
-    playerOne.gameboard.initShip(0, 5, [5,15,25,35,45]);
-
-    const playerTwo = createPlayer();
-    playerTwo.initGameboard();
-    playerTwo.gameboard.initShip(0, 5, [10,20,30,40,50]);
+    const whoPlaysFirst = 0;
+    const game = createGame(whoPlaysFirst)
+    game.playerOne.gameboard.initShip(0, 5, [5,15,25,35,45]);
+    game.playerTwo.gameboard.initShip(0, 5, [10,20,30,40,50]);
 
     const pOneLogic = () => {
         const spotsArr = [10,20,30,40,50];
-        const spot = setSpot(playerTwo, spotsArr)
+        const spot = setSpot(game.playerTwo, spotsArr)
         return spot
     };
     const pTwoLogic = () => {
-        const spot = randSpot(playerOne, 1)
+        const spot = randSpot(game.playerOne, 1)
         return spot
     };
-
-    const whoPlaysFirst = 0;
-    const game = createGame(playerOne, playerTwo, whoPlaysFirst)
 
     for (let i = 0; i < 9; i++) {
         if (game.playsNext == 0) {
@@ -63,25 +52,19 @@ test('Init game w/ two players & ships, use set logic player 1 & rand logic for 
 });
 
 test('Init game w/ two bot players & ships, use incremental logic for plays, and return player 1 as winner', () => {
-    const playerOne = createPlayer();
-    playerOne.initGameboard();
-    playerOne.gameboard.initShip(0, 5, [5,15,25,35,45]);
-
-    const playerTwo = createPlayer();
-    playerTwo.initGameboard();
-    playerTwo.gameboard.initShip(0, 5, [1,2,3,4,5]);
+    const whoPlaysFirst = 0;
+    const game = createGame(whoPlaysFirst)
+    game.playerOne.gameboard.initShip(0, 5, [5,15,25,35,45]);
+    game.playerTwo.gameboard.initShip(0, 5, [1,2,3,4,5]);
 
     const pOneLogic = () => {
-        const spot = incSpot(playerTwo, 1)
+        const spot = incSpot(game.playerTwo, 1)
         return spot
     };
     const pTwoLogic = () => {
-        const spot = incSpot(playerOne, 1)
+        const spot = incSpot(game.playerOne, 1)
         return spot
     };
-
-    const whoPlaysFirst = 0;
-    const game = createGame(playerOne, playerTwo, whoPlaysFirst)
 
     for (let i = 0; i < 9; i++) {
         if (game.playsNext == 0) {
@@ -95,4 +78,52 @@ test('Init game w/ two bot players & ships, use incremental logic for plays, and
     const winner = game.checkWhoWon();
 
     expect(winner).toBe('Player 1');
+});
+
+test('Init game, players, gameboards, & ships using createGame\'s methods & properties, use random logic for plays, and return winner', () => {
+    const whoPlaysFirst = 0;
+    const game = createGame(whoPlaysFirst)
+    game.initShips();    
+    
+    const pOneLogic = () => {
+        const spot = randSpot(game.playerTwo)
+        return spot
+    };
+    const pTwoLogic = () => {
+        const spot = randSpot(game.playerOne)
+        return spot
+    };
+
+    const simulation = {
+        startGame() {
+            this.playerOnePlays()
+        },
+        playerOnePlays() {
+            game.pOnePlays(pOneLogic())
+            if (game.checkForWin() != true) {
+                this.playerTwoPlays();
+            } else {
+                return
+            }
+        },
+        playerTwoPlays() {
+            game.pTwoPlays(pTwoLogic())
+            if (game.checkForWin() != true) {
+                this.playerOnePlays();
+            } else {
+                return
+            }
+        }
+    }
+
+    simulation.startGame();
+    // console.log(`pOne landed: ${game.playerOne.gameboard.landedHits}`)
+    // console.log(`pOne missed: ${game.playerOne.gameboard.missedHits}`)
+    // console.log(`pTwo landed: ${game.playerTwo.gameboard.landedHits}`)
+    // console.log(`pTwo missed: ${game.playerTwo.gameboard.missedHits}`)
+
+    const winner = game.checkWhoWon();
+    // console.log(`winner: ${winner}`)
+
+    expect(winner == 'Player 1' || winner == 'Player 2').toBeTruthy();
 });

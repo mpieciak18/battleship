@@ -23,6 +23,7 @@ const createGameboard = () => ({
         } else {
             this.missedHits.push(spot);
         };
+        // return 'attack received';
     },
     checkAllSunk() {
         const shipObjArr = Object.entries(this.ships);
