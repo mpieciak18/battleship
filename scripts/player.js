@@ -1,7 +1,7 @@
 const createGameboard = require('../scripts/gameboard');
 
 const createPlayer = () => ({
-    gameboard: undefined,
+    gameboard: createGameboard(),
     initGameboard() {
         this.gameboard = createGameboard();
     },
