@@ -1,13 +1,13 @@
-const createGameboard = require('../scripts/gameboard');
+const createBoard = require('./board');
 
 const createPlayer = (playerName) => ({
     name: playerName,
-    gameboard: createGameboard(),
-    initGameboard() {
-        this.gameboard = createGameboard();
+    board: createBoard(),
+    initBoard() {
+        this.board = createBoard();
     },
     attack(otherPlayer, spot) {
-        otherPlayer.gameboard.receiveAttack(spot);
+        otherPlayer.board.receiveAttack(spot);
     }
 });
 

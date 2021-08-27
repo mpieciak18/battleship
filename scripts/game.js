@@ -14,8 +14,8 @@ const createGame = (whoPlaysFirst = 0) => ({
             [7],[24,25],[31],[38,39],[46],[58],[63,73],[65,75,85],[77,87,97],[70,80,90,100]
         ];
         for (let i = 0; i < 10; i++) {
-            this.playerOne.gameboard.initShip(i, pOneShips[i].length, pOneShips[i])
-            this.playerTwo.gameboard.initShip(i, pTwoShips[i].length, pTwoShips[i])
+            this.playerOne.board.initShip(i, pOneShips[i].length, pOneShips[i])
+            this.playerTwo.board.initShip(i, pTwoShips[i].length, pTwoShips[i])
         };
     },
     pOnePlays(spot) {
@@ -27,10 +27,10 @@ const createGame = (whoPlaysFirst = 0) => ({
         this.playsNext = 0
     },
     checkForWin() {
-        if (this.playerOne.gameboard.checkAllSunk() == true) {
+        if (this.playerOne.board.checkAllSunk() == true) {
             this.winner = 'Player 2'
             return true
-        } else if (this.playerTwo.gameboard.checkAllSunk() == true) {
+        } else if (this.playerTwo.board.checkAllSunk() == true) {
             this.winner = 'Player 1'
             return true
         } else {

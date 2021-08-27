@@ -1,6 +1,6 @@
-const createShip = require('../scripts/ship');
+const createShip = require('./ship');
 
-const createGameboard = () => ({
+const createBoard = () => ({
     positions: initPositions(),
     ships: {},
     missedHits: [],
@@ -50,4 +50,4 @@ const initPositions = () => {
     return obj
 };
 
-module.exports = createGameboard;
+module.exports = createBoard;

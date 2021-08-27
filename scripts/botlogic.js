@@ -3,8 +3,8 @@ const randSpot = (otherPlayer) => {
     
     while (spot == '') {
         const possiblePlay = Math.ceil(Math.random() * 100);
-        const landedHits = otherPlayer.gameboard.landedHits;
-        const missedHits = otherPlayer.gameboard.missedHits;
+        const landedHits = otherPlayer.board.landedHits;
+        const missedHits = otherPlayer.board.missedHits;
         if (landedHits.includes(possiblePlay) || missedHits.includes(possiblePlay)) {
             continue;
         } else {
@@ -16,8 +16,8 @@ const randSpot = (otherPlayer) => {
 };
 
 const incSpot = (otherPlayer, firstSpot) => {
-    const landedHits = otherPlayer.gameboard.landedHits;
-    const missedHits = otherPlayer.gameboard.missedHits;
+    const landedHits = otherPlayer.board.landedHits;
+    const missedHits = otherPlayer.board.missedHits;
     const hits = [].concat(landedHits, missedHits);
     hits.sort();
 
@@ -32,8 +32,8 @@ const incSpot = (otherPlayer, firstSpot) => {
 };
 
 const setSpot = (otherPlayer, spotsArr) => {
-    const landedHits = otherPlayer.gameboard.landedHits;
-    const missedHits = otherPlayer.gameboard.missedHits;
+    const landedHits = otherPlayer.board.landedHits;
+    const missedHits = otherPlayer.board.missedHits;
     const hits = [].concat(landedHits, missedHits);
 
     let spot;
