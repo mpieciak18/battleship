@@ -1,4 +1,4 @@
-const createShip = require('../scripts/ship');
+import {createShip} from '../scripts/ship.js'
 
 test('Create a ship w/ length of 5 and return same length using object getter', () => {
     expect(createShip(5).getLength()).toBe(5);

@@ -1,4 +1,4 @@
-const createBoard = require('./board');
+import {createBoard} from './board.js'
 
 const createPlayer = (playerName) => ({
     name: playerName,
@@ -11,4 +11,4 @@ const createPlayer = (playerName) => ({
     }
 });
 
-module.exports = createPlayer;
+export {createPlayer}

@@ -1,5 +1,5 @@
-const {randSpot, incSpot, setSpot} = require('../scripts/botlogic');
-const createGame = require('../scripts/game');
+import {randSpot, incSpot, setSpot} from '../scripts/botlogic.js'
+import {createGame} from '../scripts/game.js'
 
 test('Init game w/ two players & ships, guarantee player 1 to win, and check for win', () => {
     const whoPlaysFirst = 'Player 1';
@@ -37,7 +37,7 @@ test('Init game w/ two players & ships, use set logic player 1 & rand logic for 
     };
 
     for (let i = 0; i < 9; i++) {
-        if (game.playsNext == 0) {
+        if (game.whoseTurn == 'Player 1') {
             game.pOnePlays(pOneLogic())
         } else {
             game.pTwoPlays(pTwoLogic())
@@ -66,7 +66,7 @@ test('Init game w/ two bot players & ships, use incremental logic for plays, and
     };
 
     for (let i = 0; i < 9; i++) {
-        if (game.playsNext == 0) {
+        if (game.whoseTurn == 'Player 1') {
             game.pOnePlays(pOneLogic())
         } else {
             game.pTwoPlays(pTwoLogic())

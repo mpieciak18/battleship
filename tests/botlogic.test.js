@@ -1,5 +1,5 @@
-const {randSpot, incSpot, setSpot} = require('../scripts/botlogic');
-const createPlayer = require('../scripts/player');
+import {randSpot, incSpot, setSpot} from '../scripts/botlogic.js'
+import {createPlayer} from '../scripts/player.js'
 
 test('Create bot & other player, have bot attack player, and confirm hit landed somewhere on the board', () => {
     const player = createPlayer();

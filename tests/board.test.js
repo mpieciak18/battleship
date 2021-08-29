@@ -1,4 +1,4 @@
-const createBoard = require('../scripts/board');
+import {createBoard} from '../scripts/board.js'
 
 test('Create gameboard object and return positions property with (blank) spots 1-100', () => {
     const board = createBoard();

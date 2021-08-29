@@ -17,4 +17,4 @@ const createShip = (len, ind = undefined, spotsArr = []) => ({
     }
 });
 
-module.exports = createShip;
+export {createShip}

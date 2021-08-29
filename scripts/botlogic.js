@@ -50,4 +50,4 @@ const setSpot = (otherPlayer, spotsArr) => {
     return spot
 };
 
-module.exports = {randSpot, incSpot, setSpot};
+export {randSpot, incSpot, setSpot};

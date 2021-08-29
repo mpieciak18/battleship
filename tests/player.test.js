@@ -1,4 +1,4 @@
-const createPlayer = require('../scripts/player');
+import {createPlayer} from '../scripts/player.js'
 
 test('Create player with gameboard & check that its gameboard\'s positions property contain keys 1-100', () => {
     const player = createPlayer();

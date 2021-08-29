@@ -26,3 +26,5 @@ const display = {
         return box
     }
 }
+
+export {display}

@@ -1,4 +1,4 @@
-const createShip = require('./ship');
+import {createShip} from './ship.js'
 
 const createBoard = () => ({
     positions: initPositions(),
@@ -50,4 +50,4 @@ const initPositions = () => {
     return obj
 };
 
-module.exports = createBoard;
+export {createBoard}

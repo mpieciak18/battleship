@@ -1,4 +1,4 @@
-const createPlayer = require('../scripts/player')
+import {createPlayer} from '../scripts/player.js'
 
 const createGame = (whoPlaysFirst = 'Player 1') => ({
     playerOne: createPlayer('Player 1'),
@@ -42,4 +42,4 @@ const createGame = (whoPlaysFirst = 'Player 1') => ({
     }
 });
 
-module.exports = createGame;
+export {createGame}
