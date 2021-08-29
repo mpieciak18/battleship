@@ -1,9 +1,9 @@
 const createPlayer = require('../scripts/player')
 
-const createGame = (whoPlaysFirst = 0) => ({
+const createGame = (whoPlaysFirst = 'Player 1') => ({
     playerOne: createPlayer('Player 1'),
     playerTwo: createPlayer('Player 2'),
-    playsNext: whoPlaysFirst,
+    whoseTurn: whoPlaysFirst,
     winner: '',
 
     initShips() {
@@ -20,11 +20,11 @@ const createGame = (whoPlaysFirst = 0) => ({
     },
     pOnePlays(spot) {
         this.playerOne.attack(this.playerTwo, spot)
-        this.playsNext = 1
+        this.whoseTurn = 'Player 2'
     },
     pTwoPlays(spot) {
         this.playerTwo.attack(this.playerOne, spot)
-        this.playsNext = 0
+        this.whoseTurn = 'Player 1'
     },
     checkForWin() {
         if (this.playerOne.board.checkAllSunk() == true) {

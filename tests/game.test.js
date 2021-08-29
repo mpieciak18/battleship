@@ -2,7 +2,7 @@ const {randSpot, incSpot, setSpot} = require('../scripts/botlogic');
 const createGame = require('../scripts/game');
 
 test('Init game w/ two players & ships, guarantee player 1 to win, and check for win', () => {
-    const whoPlaysFirst = 0;
+    const whoPlaysFirst = 'Player 1';
     const game = createGame(whoPlaysFirst);
     
     game.playerTwo.board.initShip(0, 5, [10,20,30,40,50]);
@@ -21,7 +21,7 @@ test('Init game w/ two players & ships, guarantee player 1 to win, and check for
 });
 
 test('Init game w/ two players & ships, use set logic player 1 & rand logic for player 2, and return player 1 as winner', () => {
-    const whoPlaysFirst = 0;
+    const whoPlaysFirst = 'Player 1';
     const game = createGame(whoPlaysFirst)
     game.playerOne.board.initShip(0, 5, [5,15,25,35,45]);
     game.playerTwo.board.initShip(0, 5, [10,20,30,40,50]);
@@ -51,7 +51,7 @@ test('Init game w/ two players & ships, use set logic player 1 & rand logic for 
 });
 
 test('Init game w/ two bot players & ships, use incremental logic for plays, and return player 1 as winner', () => {
-    const whoPlaysFirst = 0;
+    const whoPlaysFirst = 'Player 1';
     const game = createGame(whoPlaysFirst)
     game.playerOne.board.initShip(0, 5, [5,15,25,35,45]);
     game.playerTwo.board.initShip(0, 5, [1,2,3,4,5]);
@@ -80,7 +80,7 @@ test('Init game w/ two bot players & ships, use incremental logic for plays, and
 });
 
 test('Init game, players, gameboards, & ships using createGame\'s methods & properties, use random logic for plays, and return winner', () => {
-    const whoPlaysFirst = 0;
+    const whoPlaysFirst = 'Player 1';
     const game = createGame(whoPlaysFirst)
     game.initShips();    
     
