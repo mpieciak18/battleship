@@ -1,5 +1,5 @@
-import {initDisplay} from './scripts/display.js'
+import {initBaseDisplay, renderDom} from './scripts/display.js'
 
-const display = initDisplay()
-const gridOne = display.initGrid('grid-one', 1)
-const gridTwo = display.initGrid('grid-two', 2)
+const display = initBaseDisplay()
+const dom = renderDom(display)
+dom.initShips()

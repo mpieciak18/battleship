@@ -49,6 +49,9 @@ header > h1 {
     text-align: center;
     background-color: rgb(255, 255, 255);
 }
+.grid-box.player-boat {
+    background-color: rgb(179, 184, 255);
+}
 @media (hover: hover) {
     #grid-one .grid-box:hover {
       background-color: rgb(223, 223, 223);
