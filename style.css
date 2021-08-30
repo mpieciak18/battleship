@@ -1,7 +1,7 @@
-@font-face {
+/* @font-face {
     font-family: 'Tisa Sans Pro';
     src: url(./fonts/tisa-sans-pro.ttf)
-}
+} */
 header {
     text-align: center;
     font-size: x-large;
@@ -10,13 +10,17 @@ header > h1 {
     margin-top: 30px;
     margin-bottom: 20px;
 }
-body {
+/* body {
     font-family: 'Tisa Sans Pro';
-}
+} */
 #status {
     font-size: large;
     text-align: center;
     margin-bottom: 25px;
+}
+#grids {
+    display: flex;
+    flex-direction: row;
 }
 .grid {
     display: flex;
@@ -33,9 +37,9 @@ body {
     display: flex;
     flex-direction: row;
 }
-.grid-square {
-    height: 100px;
-    width: 100px;
+.grid-box {
+    height: 50px;
+    width: 50px;
     border-color: slategray;
     border-style: solid;
     border-width: 1px;
@@ -43,5 +47,15 @@ body {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    font-size: 75px;
+    background-color: rgb(255, 255, 255);
+}
+@media (hover: hover) {
+    #grid-one .grid-box:hover {
+      background-color: rgb(223, 223, 223);
+      cursor: pointer;
+    }
+    #grid-one .grid-box:active {
+      background-color: rgb(201, 201, 201);
+      cursor: pointer;
+    }
 }
