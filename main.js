@@ -1,5 +1,11 @@
-import {initBaseDisplay, renderDom} from './scripts/display.js'
+import {initBaseDisplay, initGrids, initShipsUi, initSpotsUi} from './scripts/display.js'
+import {createGame} from './scripts/game.js'
+import {randSpot} from './scripts/botlogic.js'
 
+const game = createGame()
 const display = initBaseDisplay()
-const dom = renderDom(display)
-dom.initShips()
+const grids = initGrids(display)
+const shipsUi = initShipsUi(grids, game)
+shipsUi.init()
+const spotsUi = initSpotsUi(game, randSpot)
+spotsUi.enablePlay()

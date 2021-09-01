@@ -21,6 +21,11 @@ header > h1 {
 #grids {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.grid-title {
+    text-align: center;
 }
 .grid {
     display: flex;
@@ -50,7 +55,13 @@ header > h1 {
     background-color: rgb(255, 255, 255);
 }
 .grid-box.player-boat {
-    background-color: rgb(179, 184, 255);
+    background-color: rgb(206, 210, 255);
+}
+.grid-box.landed-hit {
+    background-color: rgb(255, 206, 206);
+}
+.grid-box.missed-hit {
+    background-color: rgb(201, 201, 201);
 }
 @media (hover: hover) {
     #grid-one .grid-box:hover {

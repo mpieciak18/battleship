@@ -20,6 +20,15 @@ test('Init game w/ two players & ships, guarantee player 1 to win, and check for
     expect(game.checkForWin()).toBe(true);
 });
 
+test('Init game w/ two players & ships, and return player one\'s gameboard\'s positions property', () => {
+    const whoPlaysFirst = 'Player 1';
+    const game = createGame(whoPlaysFirst)
+    game.playerOne.board.initShip(0, 5, [5,15,25,35,45]);
+    game.playerTwo.board.initShip(0, 5, [10,20,30,40,50]);
+
+    expect(game.playerOne.board.positions != undefined).toBeTruthy();
+});
+
 test('Init game w/ two players & ships, use set logic player 1 & rand logic for player 2, and return player 1 as winner', () => {
     const whoPlaysFirst = 'Player 1';
     const game = createGame(whoPlaysFirst)

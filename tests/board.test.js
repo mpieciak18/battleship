@@ -33,6 +33,13 @@ test('Create gameboard object, create ship that occupies spots, receive attack, 
     expect(board.ships[0].health).toBe(4);
 });
 
+test('Create gameboard object, create ship that occupies spots, receive attack, and check if spot is marked as hit', () => {
+    const board = createBoard();
+    board.initShip(0, 5, [25, 35, 45, 55, 65]);
+    board.receiveAttack(45);
+    expect(board.positions[45].hit).toBe(true);
+});
+
 test('Create gameboard object, receive attack on empty spot, and return attacked spot', () => {
     const board = createBoard();
     board.receiveAttack(45);
