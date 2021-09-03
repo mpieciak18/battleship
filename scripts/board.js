@@ -25,6 +25,9 @@ const createBoard = () => ({
         };
         // return 'attack received';
     },
+    checkSunk(shipInd) {
+        return this.positions[shipInd].isSunk();
+    },
     checkAllSunk() {
         const shipObjArr = Object.entries(this.ships);
         for (let i = 0; i < shipObjArr.length; i++) {

@@ -60,6 +60,9 @@ header > h1 {
 .grid-box.landed-hit {
     background-color: rgb(255, 206, 206);
 }
+.grid-box.sunk-ship {
+    background-color: rgb(255, 106, 106)
+}
 .grid-box.missed-hit {
     background-color: rgb(201, 201, 201);
 }
