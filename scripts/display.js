@@ -55,64 +55,16 @@ const initShipsUi = (grids, game) => ({
     }
 })
 
-const initSpotsUi = (game, botLogic) => ({
-    enablePlay() {
-        for (let i = 1; i <= 100; i++) {
-            const box = document.getElementById(`1: ${i}`)
-            const classArr = [...box.classList]
-            if (classArr.includes('landed-hit') || classArr.includes('missed-hit') == false) {
-                box.addEventListener('click', (event) => this.userPlays(event))
-                box.event
-            }
-        }
-    },
-    disablePlay() {
-        for (let i = 1; i <= 100; i++) {
-            const box = document.getElementById(`1: ${i}`)
-            const classArr = [...box.classList]
-            if (classArr.includes('landed-hit') || classArr.includes('missed-hit') == false) {
-                box.removeEventListener('click', (event) => this.userPlays(event))
-            }
-        }
-    },
-    async userPlays(event) {
-        if (game.whoseTurn == 'Player 1') {
-            const spot = event.target
-            const spotNum = Number(spot.id.slice(2))
-            game.pOnePlays(spotNum)
-            this.displayHit(spot, spotNum, 'user')
-            if (game.checkForWin() != true) {
-                this.disablePlay()
-                this.changePlayStatus('bot')
-                await wait(1000)
-                this.botPlays()
-            } else {
-                this.gameWon()
-            }
-        }
-    },
-    botPlays() {
-        const botSelection = botLogic(game.playerOne)
-        const spotNum = botSelection
-        const spot = document.getElementById(`2: ${spotNum}`)
-        game.pTwoPlays(spotNum)
-        this.displayHit(spot, spotNum, 'bot')
-        if (game.checkForWin() != true) {
-            this.enablePlay()
-            this.changePlayStatus('user')
-        } else {
-            this.gameWon()
-        }
-    },
+const initPlayStatus = (game) => ({
     displayHit(spot, spotNum, player) {
         spot.innerText = '✕'
-        let hitStatus = ''
+        let occupied = ''
         if (player == 'user') {
-            hitStatus = game.playerTwo.board.positions[spotNum].hit
+            occupied = game.playerTwo.board.positions[spotNum].occupied
         } else {
-            hitStatus = game.playerOne.board.positions[spotNum].hit
+            occupied = game.playerOne.board.positions[spotNum].occupied
         }
-        if (hitStatus == true) {
+        if (occupied == true) {
             spot.classList.add('landed-hit')
         } else {
             spot.classList.add('missed-hit')
@@ -130,15 +82,78 @@ const initSpotsUi = (game, botLogic) => ({
         const playStatus = document.getElementById('status')
         const winner = game.checkWhoWon()
         if (winner == 'Player 1') {
-            playStatus.innerText = 'game.playerOne.board.positionsPlayer 1 Wins!'
+            playStatus.innerText = 'Player 1 Wins!'
         } else {
             playStatus.innerText = 'Player 2 Wins!'
         }
     }
 })
 
+const initPlays = (game, botLogic) => ({
+    playStatus: initPlayStatus(game),
+    enablePlay() {
+        for (let i = 1; i <= 100; i++) {
+            const box = document.getElementById(`1: ${i}`)
+            const classArr = [...box.classList]
+            if (classArr.includes('landed-hit') || classArr.includes('missed-hit') == false) {
+                box.addEventListener('click', (event) => this.userPlays(event))
+            }
+        }
+    },
+    disablePlay() {
+        for (let i = 1; i <= 100; i++) {
+            const box = document.getElementById(`1: ${i}`)
+            const classArr = [...box.classList]
+            if (classArr.includes('landed-hit') || classArr.includes('missed-hit') == false) {
+                box.removeEventListener('click', (event) => this.userPlays(event))
+            }
+        }
+    },
+    // User's async play function containing await delay
+    async userPlays(event) {
+        // Proceeds if it is player 1's turn
+        if (game.whoseTurn == 'Player 1') {
+            const spot = event.target
+            const spotNum = Number(spot.id.slice(2))
+            // Proceeds if the spot has not been played already
+            if (game.playerTwo.board.positions[spotNum].hit == false) {
+                // Submits play to game object and displays hit via DOM
+                game.pOnePlays(spotNum)
+                this.playStatus.displayHit(spot, spotNum, 'user')
+                // Checks for win and proceeds to bot's play or indicates game as won
+                if (game.checkForWin() != true) {
+                    this.disablePlay()
+                    this.playStatus.changePlayStatus('bot')
+                    await wait(500)
+                    this.botPlays()
+                } else {
+                    this.playStatus.gameWon()
+                }
+            }
+        }
+    },
+    // Bot's play function
+    botPlays() {
+        // Makes selection using botlogic attribute
+        const botSelection = botLogic(game.playerOne)
+        const spotNum = botSelection
+        const spot = document.getElementById(`2: ${spotNum}`)
+        // Submits play to game object and displays hit via DOM
+        game.pTwoPlays(spotNum)
+        this.playStatus.displayHit(spot, spotNum, 'bot')
+        // Checks for win and proceeds to bot's play or indicates game as won
+        if (game.checkForWin() != true) {
+            this.enablePlay()
+            this.playStatus.changePlayStatus('user')
+        } else {
+            this.playStatus.gameWon()
+        }
+    }
+})
+
+// Creates delay in async functions
 function wait(ms)  {
     return new Promise( resolve => { setTimeout(resolve, ms); });
 }
 
-export {initBaseDisplay, initGrids, initShipsUi, initSpotsUi}
+export {initBaseDisplay, initGrids, initShipsUi, initPlays}
