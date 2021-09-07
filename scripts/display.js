@@ -1,3 +1,5 @@
+import { surroundingSpots } from "./surroundingspots.js"
+
 const initBaseDisplay = () => ({
     initGrid(gridId, gridNum) {
         const grid = document.getElementById(gridId)
@@ -57,10 +59,6 @@ const initShipsUi = (grids, game) => ({
         }
         const box = row.children[boxNum]
         box.classList.add(shipClass)
-        // Remove 'hit' class is ship is sunk
-        // if (shipClass = 'ship-sunk') {
-        //     box.classList.remo
-        // }
     }
 })
 
@@ -108,6 +106,17 @@ const initPlayStatus = (game, shipsUi, grids) => ({
         for (let i = 0; i < shipSpots.length; i++) {
             const spot = shipSpots[i]
             shipsUi.colorSpot(spot, grid, 'sunk-ship')
+        }
+        // Mark off surrounding spots of sunk ship
+        const surrSpots = surroundingSpots(shipSpots)
+        for (let i = 0; i < surrSpots.length; i++) {
+            const spot = surrSpots[i]
+            shipsUi.colorSpot(spot, grid, 'missed-hit')
+            if (player == 'user') {
+                game.pOnePlays(spot)
+            } else {
+                game.pTwoPlays(spot)
+            }
         }
     },
     changePlayStatus(player) {
