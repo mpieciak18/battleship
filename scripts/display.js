@@ -22,6 +22,9 @@ const initBaseDisplay = () => ({
     initGridBox(gridNum, rowNum, num) {
         const box = document.createElement('div')
         box.classList = 'grid-box'
+        if (gridNum == 1) {
+            box.classList.add('playable')
+        }
         const boxNum = rowNum * 10 + num
         box.id = `${gridNum}: ${boxNum}`
         return box
@@ -59,6 +62,9 @@ const initShipsUi = (grids, game) => ({
         }
         const box = row.children[boxNum]
         box.classList.add(shipClass)
+        if (shipClass == 'missed-hit' && grid.id == 'grid-one') {
+            box.classList.remove('playable')
+        }
     }
 })
 
@@ -76,6 +82,8 @@ const initPlayStatus = (game, shipsUi, grids) => ({
                 shipInd = game.playerTwo.board.positions[spotNum].ship
                 shipSunk = game.playerTwo.board.ships[shipInd].isSunk()
             }
+            // Removes 'playable' class from spot if spot is on grid one / bot's board
+            spot.classList.remove('playable')
         } else {
             occupied = game.playerOne.board.positions[spotNum].occupied
             if (occupied == true) {

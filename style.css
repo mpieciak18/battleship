@@ -67,11 +67,13 @@ header > h1 {
     background-color: rgb(201, 201, 201);
 }
 @media (hover: hover) {
-    #grid-one .grid-box:hover {
+    .playable:hover {
+    /* #grid-one .grid-box:hover { */
       background-color: rgb(223, 223, 223);
       cursor: pointer;
     }
-    #grid-one .grid-box:active {
+    .playable:active {
+    /* #grid-one .grid-box:active { */
       background-color: rgb(201, 201, 201);
       cursor: pointer;
     }
