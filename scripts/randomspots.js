@@ -40,7 +40,8 @@ const initRandSpotsArr = (arr) => {
         }
         // Once subArr is complete, push it to arrOfArrs & update surrSpots
         arrOfArrs.push(subArr)
-        surrSpots.push(getSurrSpots(subArr))
+        const subArrSurrSpots = getSurrSpots(subArr)
+        surrSpots.push(...subArrSurrSpots)
     }
     return arrOfArrs
 }
