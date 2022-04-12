@@ -1,5 +1,5 @@
 {
-  "name": "battleship",
+  "name": "sink-em-all",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mpieciak18/battleship.git"
+    "url": "git+https://github.com/mpieciak18/sink-em-all.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mpieciak18/battleship/issues"
+    "url": "https://github.com/mpieciak18/sink-em-all/issues"
   },
-  "homepage": "https://github.com/mpieciak18/battleship#readme",
+  "homepage": "https://github.com/mpieciak18/sink-em-all",
   "devDependencies": {
     "@babel/preset-env": "^7.15.0",
     "babel-jest": "^27.1.0",
